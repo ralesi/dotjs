@@ -22,6 +22,7 @@ function loadInjectedJS(event, path) {
 
 function onMessage(event) {
     var message = event.data;
+    
     // Check the correct message has been received and send the JS file path to loadInjectedJS().
     if (message.topic == 'LoadInjectedJS') {
         var path = message.data;
