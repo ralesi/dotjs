@@ -1,0 +1,43 @@
+{
+	"name": "__MSG_extName__",
+	"version": "4",
+	"description": "__MSG_extDescription__",
+	
+	"icons": {
+		"16": "skin/icon-16.png",
+		"48": "skin/icon-48.png",
+		"128": "skin/icon.png"
+	},
+	
+	"background_page": "background.html",
+	"browser_action": {
+		"default_icon" : "skin/icon.png"
+	},
+	"permissions": [
+		"http://*/",
+		"https://*/",
+		"tabs",
+		"contextMenus"
+	],
+	"content_scripts": [
+		{
+			"matches": ["http://*/", "https://*/"],
+			"js": ["content_helper.js"]
+		},
+		{
+			"matches": ["http://www.scribefire.com/token.php*"],
+			"js" : ["token_listener.js"]
+		},
+		{
+			"matches": ["http://www.scribefire.com/oauth2*"],
+			"js" : ["wordpress_token_listener.js"]
+		},
+		{
+			"matches": ["https://accounts.google.com/o/oauth2/approval*"],
+			"js" : ["google_token_listener.js"]
+		}
+	],
+	
+	"default_locale" : "en_US",
+	"options_page" : "options.html"
+}

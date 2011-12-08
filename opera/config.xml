@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="" version="1.0">
+  <name short="DotJS">DotJS</name>
+  <access origin="*"/>
+  <icon src="skin/icon128.png"/>
+  <license>Copyright 2011 cfinke. All rights reserved.</license>
+  <author href="http://www.scribefire.com/">cfinke</author>
+  <update-description href="https://extension-updates.opera.com/api/w3c-wd1/update/5ee3b457-f563-4a30-881b-7f6852e07fa3/"/>
+  <description xml:lang="en">Load your css and js files</description>
+</widget>
