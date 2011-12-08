@@ -1,4 +1,4 @@
-function loadInjectedJS(event, path) {
+function loadInjectedFile(event, path) {
     // Function uses path to get JS file
     var req = new XMLHttpRequest();
     req.open('GET', path, false);
@@ -11,31 +11,9 @@ function loadInjectedJS(event, path) {
 
     // Send the contents of the JS file to the injected script.
     event.source.postMessage({
-        topic: 'LoadedInjectedJS',
+        topic: 'LoadedInjectedFile',
         data: {
-            js: req.responseText,
-            path: path
-        }
-    });
-
-}
-
-function loadInjectedCSS(event, path) {
-    // Function uses path to get JS file
-    var req = new XMLHttpRequest();
-    req.open('GET', path, false);
-    req.send();
-    // Error check for reading the JS file.
-    if (!req.responseText) {
-        opera.postError('EXTENSION ERROR: Can\'t read ' + path);
-        return;
-    }
-
-    // Send the contents of the JS file to the injected script.
-    event.source.postMessage({
-        topic: 'LoadedInjectedCSS',
-        data: {
-            css: req.responseText,
+            file: req.responseText,
             path: path
         }
     });
@@ -45,13 +23,9 @@ function loadInjectedCSS(event, path) {
 function onMessage(event) {
     var message = event.data;
     // Check the correct message has been received and send the JS file path to loadInjectedJS().
-    if (message.topic == 'LoadInjectedJS') {
+    if (message.topic == 'LoadInjectedFile') {
         var path = message.data;
-        loadInjectedJS(event, path);
-    }
-    else if (message.topic == 'LoadInjectedCSS') {
-        var path = message.data;
-        loadInjectedCSS(event, path);
+        loadInjectedFile(event, path);
     }
 }
 

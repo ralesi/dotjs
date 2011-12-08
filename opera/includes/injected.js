@@ -8,34 +8,24 @@ window.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    var onJS = function(event) {
+    var onFile = function(event) {
         var message = event.data;
 
         // Check this is the correct message and path from the background script.
-        if (message.topic === 'LoadedInjectedJS' && message.data.path === path + '.js') {
-            // Remove the message listener so it doesn't get called again.
-            // opera.extension.removeEventListener('message', onJS, false);
+        if (message.topic === 'LoadedInjectedFile' && message.data.path === path + '.js') {
 
-            var js = message.data.js;
+            var js = message.data.file;
 
-            // Create a <script> element and add it to the <head> element of the current page.
             // Insert the contents of the stylesheet into the <script> element.
             var script = document.createElement('script');
             script.appendChild(document.createTextNode(js));
             document.getElementsByTagName('head')[0].appendChild(script);
         }
-    // }
-    // var onCSS = function(event) {
-        // var message = event.data;
 
-        // Check this is the correct message and path from the background script.
-    else if (message.topic === 'LoadedInjectedCSS' && message.data.path === path + '.css') {
-            // Remove the message listener so it doesn't get called again.
-            // opera.extension.removeEventListener('message', onCSS, false);
+    else if (message.topic === 'LoadedInjectedFile' && message.data.path === path + '.css') {
 
-            var css = message.data.css;
+            var css = message.data.file;
 
-            // Create a <script> element and add it to the <head> element of the current page.
             // Insert the contents of the stylesheet into the <script> element.
             var style = document.createElement('style');
             style.type = 'text/css';
@@ -44,18 +34,17 @@ window.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // On receipt of a message from the background script, execute onJS().
-    opera.extension.addEventListener('message', onJS, false);
-    // opera.extension.addEventListener('message', onCSS, false);
+    // On receipt of a message from the background script, execute onFile().
+    opera.extension.addEventListener('message', onFile, false);
 
     // Send the JS file path to the background script to get the JS.
-    opera.extension.postMessage({
-        topic: 'LoadInjectedJS',
-        data: path + '.js'
+    var types = ['js','css'];
+    for (var i=0; i<types.length; i++)
+        {
+        opera.extension.postMessage({
+        topic: 'LoadInjectedFile',
+        data: path + '.' + types[i]
     });
-    opera.extension.postMessage({
-        topic: 'LoadInjectedCSS',
-        data: path + '.css'
-    });
+};
 
 }, false);
