@@ -42,19 +42,14 @@ window.addEventListener('DOMContentLoaded', function() {
     // On receipt of a message from the background script, execute onFile().
     opera.extension.addEventListener('message', onFile, false);
 
-    if (subdomain) {
-        var types = ['js','css'];
-        for (var i=0; i<types.length; i++)
-        {
-            opera.extension.postMessage({
-                topic: 'LoadInjectedFile',
-                data: subpath + '.' + types[i]
-            });
-        };
-    }
     var types = ['js','css'];
-    for (var i=0; i<types.length; i++)
-    {
+    for (var i=0; i<types.length; i++)  {
+        if (subdomain) {
+                opera.extension.postMessage({
+                    topic: 'LoadInjectedFile',
+                    data: subpath + '.' + types[i]
+                });
+            };
         opera.extension.postMessage({
             topic: 'LoadInjectedFile',
             data: path + '.' + types[i]
