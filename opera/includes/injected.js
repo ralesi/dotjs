@@ -1,9 +1,12 @@
-window.addEventListener('DOMContentLoaded', function() {
+// window.addEventListener('DOMContentLoaded', function() {
+// Use load instead of DOMContentLoaded
+window.addEventListener('load', function() {
 
     // Specify the path to the stylesheet here:
 
     var path = 'http://localhost:3131/' + window.location.hostname.replace('www.','');
     var subdomain=window.location.pathname.split('/')[1]
+    var nextdomain=window.location.pathname.split('/')[2]
     var subpath = 'http://localhost:3131/' + window.location.hostname.replace('www.','')+'.'+subdomain;
 
     // Error check for the JavaScript filename.
@@ -44,7 +47,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     var types = ['js','css'];
     for (var i=0; i<types.length; i++)  {
-        if (subdomain) {
+        if (nextdomain) {
                 opera.extension.postMessage({
                     topic: 'LoadInjectedFile',
                     data: subpath + '.' + types[i]
