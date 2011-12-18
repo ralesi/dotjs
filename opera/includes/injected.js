@@ -44,6 +44,18 @@ window.addEventListener('load', function() {
 
     // On receipt of a message from the background script, execute onFile().
     opera.extension.addEventListener('message', onFile, false);
+    // var jpath = 'http://localhost:3131/jquery.js' 
+    // var gpath = 'http://localhost:3131/greasemonkey.js' 
+
+    // opera.extension.postMessage({
+    //     topic: 'LoadInjectedFile',
+    //     data: jpath
+    // });
+    // 
+    // opera.extension.postMessage({
+    //     topic: 'LoadInjectedFile',
+    //     data: gpath
+    // });    
 
     var types = ['js','css'];
     for (var i=0; i<types.length; i++)  {
@@ -59,5 +71,7 @@ window.addEventListener('load', function() {
         });
 
     };
+
+
 
 }, false);
