@@ -21,8 +21,18 @@ $.ajax({
 })
 }
 
-subdomain=window.location.pathname.split('/')[1]
-if (subdomain) {
-dotjs(window.location.host+'.'+subdomain)
+// subdomain=window.location.pathname.split('/')[1]
+// if (subdomain) {
+// dotjs(window.location.host+'.'+subdomain)
+// }
+// dotjs(window.location.host)
+
+url = document.URL.split('/')
+
+if (url[0].indexOf('http') == 0) {
+    if (url[3]) {
+        dotjs(url[2]+'.'+url[3])
+    }
+    dotjs(url[2])
 }
-dotjs(window.location.host)
+

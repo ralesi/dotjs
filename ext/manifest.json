@@ -1,12 +1,12 @@
 {
   "name": "dotjs",
   "manifest_version": 2,
-  "version": "1.5",
+  "version": "1.5.1",
   "description": "~/.js",
   "icons": { "48": "icon48.png",
             "128": "icon128.png" },
   "content_scripts": [{
-    "all_frames": true,
+    "all_frames": false,
     "run_at":     "document_start",
     "matches":    ["http://*/*", "https://*/*"],
     "js":         ["jquery.js", "dotjs.js"]
